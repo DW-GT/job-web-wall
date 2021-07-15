@@ -1,0 +1,53 @@
+version: '3'
+​
+services:
+  mysql:
+    build: ./database
+    image: dev_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    networks:
+      - pmanet
+    volumes:
+      - my-mysql-datavolume:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: dev_pma
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8183:80
+    networks:
+      - pmanet
+    depends_on: 
+      - mysql
+  node-backend:
+    build: ./job-info-wall-backend
+    image: node.js-backend
+    environment: 
+        - NODE_ENV=production
+        - DATABASE_HOST=mysql
+    volumes:
+        - backend-data:/home/node/app
+    depends_on: 
+      - mysql
+    networks:
+      - pmanet
+​
+  
+volumes:
+  my-mysql-datavolume:
+  backend-data:
+networks:
+ pmanet:
+   name: pmanet
+   driver: bridge
+   ipam:
+     config:
+       - subnet: 10.2.0.0/16
