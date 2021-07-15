@@ -1,5 +1,5 @@
-version: '3'
-​
+version: "3"
+
 services:
   mysql:
     build: ./database
@@ -21,33 +21,43 @@ services:
       MYSQL_ROOT_PASSWORD: root
       PMA_ARBITRARY: 1
     restart: always
-    ports:
-      - 8183:80
     networks:
       - pmanet
-    depends_on: 
+    depends_on:
       - mysql
   node-backend:
-    build: ./job-info-wall-backend
+    build: ./backend/
     image: node.js-backend
-    environment: 
-        - NODE_ENV=production
-        - DATABASE_HOST=mysql
+    environment:
+      - NODE_ENV=production
+      - DATABASE_HOST=mysql
     volumes:
-        - backend-data:/home/node/app
-    depends_on: 
+      - backend-data:/home/node/app
+    depends_on:
       - mysql
     networks:
       - pmanet
-​
-  
+    ports:
+      - 443:4000
+  node-frontend:
+    build: ./frontend/job-info-wall
+    image: node.js-frontend
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - node-backend
+    networks:
+      - pmanet
+    ports:
+      - 80:3000
+
 volumes:
   my-mysql-datavolume:
   backend-data:
 networks:
- pmanet:
-   name: pmanet
-   driver: bridge
-   ipam:
-     config:
-       - subnet: 10.2.0.0/16
+  pmanet:
+    name: pmanet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.2.0.0/16
