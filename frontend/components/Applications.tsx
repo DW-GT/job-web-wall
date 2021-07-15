@@ -75,6 +75,7 @@ export const Applications = ({}) => {
     const [val, setVal] = useState();
 
     const unsubscribe = store.subscribe(() => {
+            // @ts-ignore
         setVal(store.getState().state.typeId);
     });
 
@@ -83,8 +84,10 @@ export const Applications = ({}) => {
 
     
     let posts = useSWR(
+             // @ts-ignore
         store.getState().state != undefined && store.getState().state.typeId != -1
             ? process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/getSpecificOffers/' +
+                //@ts-ignore
                   store.getState().state.typeId
             : process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/getAllOffers/',
         (url: string) => axios(url).then((r) => {

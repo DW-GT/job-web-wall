@@ -36,9 +36,9 @@ export function uploadHandler (req: Request,res: Response) {
     if (typeof req.files === 'object') {
         const fileField = req.files.file;
         if (isSingleFile(fileField)) {  
-            if(fs.existsSync(path.join('./src/uploads/'+req.body.id+".pdf"))){
+            if(fs.existsSync(path.join('./build/uploads/'+req.body.id+".pdf"))){
                 console.log("file exists");
-                fs.unlink(path.join("./src/uploads/"+req.body.id+".pdf"),(error) =>{
+                fs.unlink(path.join("./build/uploads/"+req.body.id+".pdf"),(error) =>{
                     if(error){
                         console.log("error has occured while deleting");
                     }
@@ -46,7 +46,7 @@ export function uploadHandler (req: Request,res: Response) {
                 });
             }
 
-            fileField.mv('./src/uploads/'+req.body.id+".pdf", err => {
+            fileField.mv('./build/uploads/'+req.body.id+".pdf", err => {
                 if (err) {
                     console.log(err);
                     console.log('Error while copying file to target location');
@@ -97,20 +97,24 @@ async function addOffer(newOffer: Application) {
 
     return new Promise((resolve, reject) => {
         connection.query(
-            'INSERT INTO `applications` (name,description,company_name,email,telefon,creation_date,lastupdate_date,applicationtype_id,expire_date) VALUES(?,?,?,?,?,?,?,?,?)',
+            'INSERT INTO `applications` (name,description,company_name,email,telefon,pdf_src,creation_date,lastupdate_date,applicationtype_id,expire_date) VALUES(?,?,?,?,?,?,?,?,?,?)',
             [
                 newOffer.name,
                 newOffer.description,
                 newOffer.company_name,
                 newOffer.email,
                 newOffer.telefon,
+                " ",
                 newOffer.creation_date.substring(0,10),
-                newOffer.lastupdate_date,
+                newOffer.lastupdate_date.substring(0,10),
                 newOffer.applicationtype,
-                newOffer.expire_date,
+                newOffer.expire_date?.substring(0,10),
             ],
             //@ts-ignore
             function (error, results, fields) {
+                console.log(error);
+                console.log(results);
+                
                 resolve(results.insertId);
             }
         );
@@ -130,9 +134,9 @@ async function editOffer(offer: Application,req: Request) {
                 offer.telefon,
                 "/static/"+offer.application_id+".pdf",
                 offer.creation_date.substring(0,10),
-                offer.lastupdate_date,
+                offer.lastupdate_date.substring(0,10),
                 offer.applicationtype,
-                offer.expire_date,
+                offer.expire_date?.substring(0,10),
                 offer.application_id,
             ],
             //@ts-ignore
