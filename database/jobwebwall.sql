@@ -129,9 +129,7 @@ COMMIT;
 
 
 INSERT INTO `application_types` (`applicationtype_id`, `name`) VALUES
-(1, 'Lehrlinge'),
-(2, 'Praktikanten'),
-(3, 'Absolventen');
-
-INSERT INTO `admins` (`admin_id`, `username`, `password`, `email`) VALUES
-(1, 'Superuser', 'test', 'test.test@gmail.com');
+('1', 'Lehrlinge'),
+('2', 'Praktikanten'),
+('3', 'Absolventen');
+COMMIT;
