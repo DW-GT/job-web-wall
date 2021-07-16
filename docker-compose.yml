@@ -6,8 +6,8 @@ services:
     image: dev_mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 3306:3306
+    #ports:
+    #  - 3306:3306
     networks:
       - pmanet
     volumes:
@@ -34,9 +34,10 @@ services:
       - NODE_ENV=production
       - DATABASE_HOST=mysql
     volumes:
-      - backend-data:/home/node/app
+      - backend-data:/server/build/uploads
     depends_on:
       - mysql
+    restart: always
     networks:
       - pmanet
     ports:
@@ -48,17 +49,18 @@ services:
       - NODE_ENV=production
     depends_on:
       - node-backend
+    restart: always
     networks:
       - pmanet
     ports:
-      - 4000:3000
+      - 80:3000
 
 volumes:
   my-mysql-datavolume:
   backend-data:
 networks:
   pmanet:
-    name: pmanet
+    #name: pmanet
     driver: bridge
     ipam:
       config:
