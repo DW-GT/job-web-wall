@@ -131,5 +131,7 @@ COMMIT;
 INSERT INTO `application_types` (`applicationtype_id`, `name`) VALUES
 ('1', 'Lehrlinge'),
 ('2', 'Praktikanten'),
-('3', 'Absolventen');
+('3', 'Absolventen'),
+('4', 'Information Universitäten/FHs'),
+('5', 'Sonstiges');
 COMMIT;
