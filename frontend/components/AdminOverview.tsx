@@ -158,10 +158,12 @@ export const AdminOverview = () => {
                 <StyledAdminTableHeader>ID</StyledAdminTableHeader>
                 <StyledAdminTableHeader>Name</StyledAdminTableHeader>
                 <StyledAdminTableHeader>Firma</StyledAdminTableHeader>
+                <StyledAdminTableHeader>Erstellt</StyledAdminTableHeader>
+                <StyledAdminTableHeader>Gültig bis</StyledAdminTableHeader>
                 <StyledAdminTableHeader>Bearbeiten</StyledAdminTableHeader>
                 <StyledAdminTableHeader>Löschen</StyledAdminTableHeader>
             </tr>
-            {applications?.map((application) => {
+            {applications?.sort(function(a,b) { return +b.application_id - +a.application_id }).map((application) => {
                 return (
                     <tr>
                         <StyledAdminTableContent>
@@ -172,6 +174,12 @@ export const AdminOverview = () => {
                         </StyledAdminTableContent>
                         <StyledAdminTableContent>
                             {application.company_name}
+                        </StyledAdminTableContent>
+                        <StyledAdminTableContent>
+                            {application.creation_date.includes("T") ? application.creation_date.substr(0,application.creation_date.indexOf("T")) : "--" }
+                        </StyledAdminTableContent>
+                        <StyledAdminTableContent>
+                            {application.expire_date.includes("T") ? application.expire_date.substr(0,application.expire_date.indexOf("T")) : "--" }
                         </StyledAdminTableContent>
                         <StyledAdminTableContent>
                             <StyledEditLink

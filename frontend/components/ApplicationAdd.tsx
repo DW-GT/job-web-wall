@@ -244,14 +244,7 @@ export const ApplicationAdd = () => {
                         onChange={(e) => setFile(e.target.files)}
                     ></StyledInputField>
                     <br />
-                    <label>End-Datum:</label>
-                    <br />
-                    <StyledInputField
-                        type="date"
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                    ></StyledInputField>
-                    <br />
+                    
                     <label>Beschreibung:</label>
                     <br />
                     <StyledTextField
