@@ -164,6 +164,7 @@ export const ApplicationAdd = () => {
                     
                     data.append("file", fileToUpload);
                     data.append("id",id);
+                    data.append("timestamp",""+ new Date().getTime());
 
                     fetch(process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/upload',{
                     method: 'POST',
