@@ -54,10 +54,13 @@ export function uploadHandler (req: Request,res: Response) {
     
     if (typeof req.files === 'object') {
         const fileField = req.files.file;
+        const timeStamp = req.body.timestamp;
+        const fileName = ''+req.body.id + "_" + timeStamp + ".pdf"; 
+        console.log("Stamp: " + timeStamp);
         if (isSingleFile(fileField)) {  
-            if(fs.existsSync(path.join('./build/uploads/'+req.body.id+".pdf"))){
+            if(fs.existsSync(path.join('./build/uploads/'+fileName))){
                 console.log("file exists");
-                fs.unlink(path.join("./build/uploads/"+req.body.id+".pdf"),(error) =>{
+                fs.unlink(path.join("./build/uploads/"+fileName),(error) =>{
                     if(error){
                         console.log("error has occured while deleting");
                     }
@@ -65,7 +68,7 @@ export function uploadHandler (req: Request,res: Response) {
                 });
             }
 
-            let pdfFile = './build/uploads/'+req.body.id+".pdf"; 
+            let pdfFile = './build/uploads/'+fileName; 
             fileField.mv(pdfFile, err => {
                 if (err) {
                     console.log(err);
@@ -75,7 +78,7 @@ export function uploadHandler (req: Request,res: Response) {
                     createThumbnail(pdfFile);
                     connection.query(
                         'Update `applications` set pdf_src = ? where application_id = ?',
-                        ["/static/"+req.body.id+".pdf",req.body.id],
+                        ["/static/"+fileName,req.body.id],
                         //@ts-ignore
                         function (error, results, fields) {
                             if(error){
@@ -95,6 +98,7 @@ export function uploadHandler (req: Request,res: Response) {
 
 
 async function deleteOffer(offerId: number) {
+    //todo get name of file from database
     return new Promise((resolve, reject) => {
         // todo select for pdf-file-name
         // todo also delete .pdf.jpg File
@@ -146,7 +150,7 @@ async function addOffer(newOffer: Application) {
 
 async function editOffer(offer: Application,req: Request) {
     return new Promise((resolve, reject) => {
-        
+        console.log("File information is wrong!! Where does file be saved?");
         connection.query(
             'UPDATE `applications` SET name = ?,description  = ?,company_name = ?,email = ?,telefon = ?,pdf_src = ?,creation_date = ?,lastupdate_date = ?,applicationtype_id = ?,expire_date = ? WHERE application_id = ?',
             [
