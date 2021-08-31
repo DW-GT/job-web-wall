@@ -140,6 +140,7 @@ export const Applications = ({}) => {
                         applicationType={applicationTypeName}
                         key={index}
                         applicationId={application.application_id}
+                        pdfSrc={application.pdf_src}
                     ></ApplicationBox>
                 );
             })}

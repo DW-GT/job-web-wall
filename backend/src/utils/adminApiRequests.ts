@@ -5,6 +5,7 @@ require('dotenv').config();
 import { Application } from '../types/application';
 import * as fs from 'fs';
 import path from 'path';
+var gm = require('gm');
 
 const connection = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -15,6 +16,24 @@ const connection = mysql.createConnection({
 
 type UploadedFile = fileUpload.UploadedFile;
 
+function createThumbnail (file: String){
+
+    // file.pdf[0]
+    let pdfFirstPage = file + "[0]";
+    // The name of your pdf
+    gm(pdfFirstPage)
+        .setFormat("jpg")
+        .resize(200) // Resize to fixed 200px width, maintaining aspect ratio
+        .quality(75) // Quality from 0 to 100
+        .write(file + ".jpg", function(error: any){
+            // Callback function executed when finished
+            if (!error) {
+                console.log("Finished saving JPG");
+            } else {
+                console.log("There was an error!", error);
+            }
+    });
+}
 
 
 function isSingleFile(file: UploadedFile | UploadedFile[]): file is UploadedFile {
@@ -46,12 +65,14 @@ export function uploadHandler (req: Request,res: Response) {
                 });
             }
 
-            fileField.mv('./build/uploads/'+req.body.id+".pdf", err => {
+            let pdfFile = './build/uploads/'+req.body.id+".pdf"; 
+            fileField.mv(pdfFile, err => {
                 if (err) {
                     console.log(err);
                     console.log('Error while copying file to target location');
                     res.status(500).send("Error while copying file to target location");
                 }else {
+                    createThumbnail(pdfFile);
                     connection.query(
                         'Update `applications` set pdf_src = ? where application_id = ?',
                         ["/static/"+req.body.id+".pdf",req.body.id],
@@ -75,11 +96,13 @@ export function uploadHandler (req: Request,res: Response) {
 
 async function deleteOffer(offerId: number) {
     return new Promise((resolve, reject) => {
-        fs.unlink(path.join("./src/uploads/"+offerId+".pdf"),(error) =>{
+        // todo select for pdf-file-name
+        // todo also delete .pdf.jpg File
+        fs.unlink(path.join('./build/uploads/'+offerId+".pdf"),(error) =>{
             if(error){
                 console.log("error has occured while deleting");
             }
-            console.log("File deleted");
+            console.log("File " +  offerId + " deleted");
         });
         connection.query(
             'DELETE FROM `applications` where application_id = ?',

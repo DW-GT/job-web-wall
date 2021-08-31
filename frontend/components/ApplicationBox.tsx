@@ -16,6 +16,7 @@ type Props = {
     applicationType: string;
     endDate?: string;
     applicationId: number;
+    pdfSrc: string;
 };
 
 const StyledApplicationBox = styled.a`
@@ -73,6 +74,7 @@ export const ApplicationBox: React.FC<Props> = ({
     applicationType,
     endDate,
     applicationId,
+    pdfSrc,
 }) => {
     return (
         <StyledApplicationBox href={'/details/' + applicationId}>
@@ -82,7 +84,7 @@ export const ApplicationBox: React.FC<Props> = ({
             <StyledContentSpacing></StyledContentSpacing>
             <StyledApplicationContent>{companyName}</StyledApplicationContent>
             <StyledApplicationContent>
-                {startDate} - {endDate}
+                {startDate}
             </StyledApplicationContent>
             <StyledApplicationContent>
                 {applicationType}
@@ -91,6 +93,13 @@ export const ApplicationBox: React.FC<Props> = ({
             <StyledApplicationContent>
                 {applicationText}
             </StyledApplicationContent>
+            <Image
+            
+                    alt="PDF Thumbnail"
+                    width="50%"
+                    height="50%"
+                    src={process.env.NEXT_PUBLIC_API_ADRESS + pdfSrc + ".jpg"}
+                ></Image>
         </StyledApplicationBox>
     );
 };
