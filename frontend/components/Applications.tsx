@@ -94,6 +94,7 @@ export const Applications = ({}) => {
             setPosts(r.data);
             return r.data}),
     ).data;
+    console.log(posts);
 
     function updateApplications(text:String) {
         if(text.length === 0){
@@ -118,7 +119,7 @@ export const Applications = ({}) => {
             </SearchInputLayout>
         <ApplicationLayout>
             {
-            postsFiltered?.map((application, index) => {
+            postsFiltered?.sort(function(a,b) { return +b.application_id - +a.application_id }).map((application, index) => {
                 let applicationType = applicationTypes?.find(
                     (applicationType) =>
                         applicationType.applicationtype_id ==
