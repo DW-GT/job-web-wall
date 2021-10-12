@@ -96,7 +96,7 @@ export const ApplicationBox: React.FC<Props> = ({
             <Image
                 alt="PDF Thumbnail"
                 width="50%"
-                height="50%"
+                height="71%"
                 src={process.env.NEXT_PUBLIC_API_ADRESS + pdfSrc + ".jpg"}
             ></Image>
         </StyledApplicationBox>
