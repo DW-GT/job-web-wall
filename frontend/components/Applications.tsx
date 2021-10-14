@@ -110,13 +110,6 @@ export const Applications = ({}) => {
     return (
         <div>
 
-            <SearchInputLayout>
-                <StyledInputField
-                    type="text"
-                    placeholder="Suchen..."
-                    onChange={e => { updateApplications(e.currentTarget.value); }}
-                ></StyledInputField>
-            </SearchInputLayout>
         <ApplicationLayout>
             {
             postsFiltered?.sort(function(a,b) { return +b.application_id - +a.application_id }).map((application, index) => {
