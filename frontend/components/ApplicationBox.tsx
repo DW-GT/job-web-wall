@@ -44,6 +44,11 @@ const StyledApplicationBox = styled.a`
     }
 `;
 
+const StyledApplicationInnerBox = styled.div`
+    overflow-y: scroll;
+    height: 100%;
+`;
+
 const StyledApplicationHeadline = styled.h1`
     margin: 0;
     color: ${colors.secondaryColor};
@@ -78,6 +83,7 @@ export const ApplicationBox: React.FC<Props> = ({
 }) => {
     return (
         <StyledApplicationBox href={'/details/' + applicationId}>
+          <StyledApplicationInnerBox>
             <StyledApplicationHeadline>
                 {applicationHeadline}
             </StyledApplicationHeadline>
@@ -99,6 +105,7 @@ export const ApplicationBox: React.FC<Props> = ({
                 height="71%"
                 src={process.env.NEXT_PUBLIC_API_ADRESS + pdfSrc + ".jpg"}
             ></Image>
+          </StyledApplicationInnerBox>
         </StyledApplicationBox>
     );
 };
