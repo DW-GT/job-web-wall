@@ -32,6 +32,18 @@ const StyledNavigation = styled.div`
     min-height: 7.5vh;
 `;
 
+const StyledHtlHeadline = styled.div`
+    top: 1.8vh;
+    padding: 1.8vh 0;
+    justify-content: center;
+    color: ${colors.secondaryColor};
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+    text-align-last: center;
+    font-family: ${fonts.primaryFont};
+`;
+
 const StyledSelectBox = styled.select`
     background-color: ${colors.primaryBackgroundColor};
     color: ${colors.secondaryColor};
@@ -85,6 +97,9 @@ export const Navigation: React.FC<Props> = ({ showNavigationSelectBox }) => {
                     src="/htl-leonding-logo-small.svg"
                 ></Image>
             </StyledHtlLogo>
+            <StyledHtlHeadline>
+		HTL Leonding Jobwall&nbsp;&nbsp;&nbsp;&nbsp;
+            </StyledHtlHeadline>
             {showNavigationSelectBox ? (
                 <StyledSelectBox onChange={changeContent} id="typeChanger">
                     <StyledOption value="-1">All</StyledOption>
