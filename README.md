@@ -3,6 +3,7 @@
 ## Installation
 1. First download the project. Docker should be installed on the local machine.
 1. Then configure some files for port settings, database connection, frontend and needed database entries
+1. Afterwards you can start the application with docker-compose up (maybe you have to do this a second time after the database is ready to use.)
 
 ### Port Settings
 In the file docker-compose.yml the local ports can be changed.
