@@ -1,8 +1,8 @@
 # Job Web Wall
 
 ## Installation
-. First download the project. Docker should be installed on the local machine.
-. Then configure some files for port settings, database connection, frontend and needed database entries
+1. First download the project. Docker should be installed on the local machine.
+1. Then configure some files for port settings, database connection, frontend and needed database entries
 
 ### Port Settings
 In the file docker-compose.yml the local ports can be changed.
