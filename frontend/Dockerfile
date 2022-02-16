@@ -1,4 +1,4 @@
-FROM node
+FROM node:16.13.1
 WORKDIR /server
 EXPOSE 4000
 COPY ./package*.json ./
