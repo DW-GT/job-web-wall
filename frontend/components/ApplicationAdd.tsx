@@ -165,6 +165,8 @@ export const ApplicationAdd = () => {
                     data.append("file", fileToUpload);
                     data.append("id",id);
                     data.append("timestamp",""+ new Date().getTime());
+                    data.append("admin_id",admin_id);
+                    data.append("token",""+ token);
 
                     fetch(process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/upload',{
                     method: 'POST',

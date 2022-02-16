@@ -92,7 +92,15 @@ router.put('/editOffer',async(req:Request, res:Response) =>{
             res.status(401).send("You are Unauthorized");
     }});
 
-router.post('/upload', (req:Request, res:Response) => {uploadHandler(req,res)});
+router.post('/upload', (req:Request, res:Response) => {
+        if(checkLoginToken(req.body.admin_id, req.body.token)){
+            uploadHandler(req,res)
+        }else{
+            console.log(req.body);
+            console.log("Unauthorized");
+            res.status(401).send("You are Unauthorized");
+        }
+    });
 
 // export router
 module.exports = router;
