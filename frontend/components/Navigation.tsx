@@ -16,8 +16,8 @@ const StyledHtlLogo = styled.a`
     position: absolute;
     top: 1.8vh;
     left: 1.8vh;
-    height: 3.9vh;
-    width: 3.9vh;
+    height: 70%;
+    width: 15%;
 `;
 
 const StyledNavigation = styled.div`
@@ -92,8 +92,7 @@ export const Navigation: React.FC<Props> = ({ showNavigationSelectBox }) => {
             <StyledHtlLogo href="/">
                 <Image
                     alt="Htl Logo"
-                    width="100%"
-                    height="100%"
+                    layout="fill"
                     src="/htl-leonding-logo-small.svg"
                 ></Image>
             </StyledHtlLogo>
