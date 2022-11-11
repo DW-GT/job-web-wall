@@ -14,6 +14,20 @@ const PdfData = styled.datalist`
     width: 100%;
 `;
 
+const PdfBox = styled.div`
+/* Create two equal columns that floats next to each other */
+
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 100%;
+`;
+
+const CenterAlign = styled.p`
+    text-align: center;
+`;
+
+
 
 
 export const Dashboard = ({}) => {
@@ -48,6 +62,7 @@ export const Dashboard = ({}) => {
     ).data;
     console.log(posts);
     if (typeof window !== "undefined") {
+        // TODO: only posts of the last x month from today - starting with (sort) newest offers first
         const myJson = JSON.stringify(posts);
         localStorage.setItem("allPDFdata", myJson);
         localStorage.setItem("pdfPath", process.env.NEXT_PUBLIC_API_ADRESS);
@@ -61,12 +76,18 @@ export const Dashboard = ({}) => {
             </script>
         
             <div id="my_pdf_viewer">
-                <div id="canvas_container">
+                <PdfBox id="canvas_container">
                     <canvas id="pdf_renderer"></canvas>
-                </div>
-                
-                
-        
+                </PdfBox>
+                <script src="/qrcode.min.js"></script>
+                <PdfBox>
+                    <CenterAlign># # #</CenterAlign>
+                    <CenterAlign>Dieser QR-Code kann verwendet werden, um direkt auf das PDF-Dokument zu navigieren!</CenterAlign>
+                    <CenterAlign>Diese Seite bzw. Dokumente sind nur intern im Schulnetz erreichbar.</CenterAlign>
+                    <CenterAlign>Daher muss die Verbindung mit WLAN aktiviert sein!</CenterAlign>
+                    <CenterAlign># # #</CenterAlign>
+                    <div id="qrcode"></div>
+                </PdfBox>
             </div>
  
             <script src="/pdfDashboard.js"></script>

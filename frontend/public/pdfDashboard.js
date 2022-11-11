@@ -3,8 +3,8 @@
 
 var URL_STATIC_SERVER = '';//http://localhost:443'; // will be set below
 
-var index = 0;
-var maxIndex = 0;
+var index = -1;
+var maxIndex = -1;
 setInterval(changeCurrentPdf, 10000)
 
 function changeCurrentPdf() {
@@ -22,19 +22,27 @@ function changeCurrentPdf() {
         myState.pdf = pdf;
         render();
     });
+    document.getElementById("qrcode").innerHTML="";
+    console.log(data[index])
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: data[index],
+        width: 150,
+        height: 150,
+        colorDark : "#000000",
+        colorLight : "#ffffff00", //full transparent
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    document.getElementById('qrcode').getElementsByTagName('img')[0].style.margin = "auto";
 }
 
-setInterval(getNewPdfList, 60_000) // 10 minutes = 600_000; 1 min = 60_000
+setInterval(getNewPdfList, 600_000) // 10 minutes = 600_000; 1 min = 60_000
 function getNewPdfList(){
     if(maxIndex == data.length){
         location.reload();
     }
 }
 
-var data = [
-    'http://jobwall.htl-leonding.ac.at:443/static/152_1663827363274.pdf',
-    'http://jobwall.htl-leonding.ac.at:443/static/154_1663827449333.pdf'
-]
+var data = []
 updateData(); // set current data from server
 
 var myState = {
@@ -42,7 +50,8 @@ var myState = {
     currentPage: 1,
     zoom: 1
 }
-
+setTimeout(changeCurrentPdf, 500)
+/*
 //http://jobwall.htl-leonding.ac.at:443/static/154_1663827449333.pdf
 //http://jobwall.htl-leonding.ac.at:443/static/152_1663827363274.pdf
 //pdfjsLib.getDocument('./SaltmasterMonitor.pdf').then((pdf) => {
@@ -55,6 +64,7 @@ pdfjsLib.getDocument(data[index]).then((pdf) => {
     render();
 
 });
+*/
 
 function render() {
     myState.pdf.getPage(myState.currentPage).then((page) => {
@@ -82,11 +92,13 @@ function updateData(){
     const obj = JSON.parse(text);
     console.log(obj)
     // todo check if obj is array!
+    // evtl. use .map instead of forEach?
     let newList = [];
     obj.forEach(function(value, index, array) {
         newList.push(URL_STATIC_SERVER + value.pdf_src); 
     });
     console.log(newList)
-    index = 0
+    index = -1
+    maxIndex = -1
     data = newList
 }
