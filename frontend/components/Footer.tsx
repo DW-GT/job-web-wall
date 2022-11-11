@@ -145,7 +145,7 @@ export const Footer = ({}) => {
                         alt="Htl Logo"
                         width={400}
                         height={100}
-                        src="/htl-leonding-logo.svg"
+                        src="/htl-leonding-logo-small.svg"
                     ></Image>
                 </a>
             </FooterLogoLayout>
