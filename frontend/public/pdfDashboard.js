@@ -8,7 +8,7 @@ var maxIndex = -1;
 setInterval(changeCurrentPdf, 10000)
 
 function changeCurrentPdf() {
-    if (index < data.length) {
+    if (index < data.length-1) {
         index++;
         if(maxIndex < data.length){
             // should be used to know if every pdf was at least be shown once!
@@ -18,12 +18,14 @@ function changeCurrentPdf() {
     } else {
         index = 0;
     }
+    //console.log(index);
+    //console.log(data);
     pdfjsLib.getDocument(data[index]).then((pdf) => {
         myState.pdf = pdf;
         render();
     });
     document.getElementById("qrcode").innerHTML="";
-    console.log(data[index])
+    //console.log(data[index])
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: data[index],
         width: 150,
@@ -51,20 +53,7 @@ var myState = {
     zoom: 1
 }
 setTimeout(changeCurrentPdf, 500)
-/*
-//http://jobwall.htl-leonding.ac.at:443/static/154_1663827449333.pdf
-//http://jobwall.htl-leonding.ac.at:443/static/152_1663827363274.pdf
-//pdfjsLib.getDocument('./SaltmasterMonitor.pdf').then((pdf) => {
-//pdfjsLib.getDocument('./my_document.pdf').then((pdf) => {
-pdfjsLib.getDocument(data[index]).then((pdf) => {
-//pdfjsLib.getDocument('http://jobwall.htl-leonding.ac.at:443/static/154_1663827449333.pdf').then((pdf) => {
 
-
-    myState.pdf = pdf;
-    render();
-
-});
-*/
 
 function render() {
     myState.pdf.getPage(myState.currentPage).then((page) => {
@@ -84,21 +73,18 @@ function render() {
     });
 }
 
+function getPdfPath(element){
+    return URL_STATIC_SERVER + element.pdf_src;
+}
 
 function updateData(){
     //todo run update to get real data every ... time
     URL_STATIC_SERVER = localStorage.getItem("pdfPath");
     const text = localStorage.getItem("allPDFdata")
     const obj = JSON.parse(text);
-    console.log(obj)
-    // todo check if obj is array!
-    // evtl. use .map instead of forEach?
-    let newList = [];
-    obj.forEach(function(value, index, array) {
-        newList.push(URL_STATIC_SERVER + value.pdf_src); 
-    });
-    console.log(newList)
+    //console.log(obj)
+    const newArr = obj.map(getPdfPath);
     index = -1
     maxIndex = -1
-    data = newList
+    data = newArr
 }
