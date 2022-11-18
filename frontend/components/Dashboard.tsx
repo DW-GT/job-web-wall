@@ -27,7 +27,7 @@ const CenterAlign = styled.p`
     text-align: center;
 `;
 
-
+const MAX_DASHBOARD_DOCUMENTS = 30;
 
 
 export const Dashboard = ({}) => {
@@ -60,7 +60,15 @@ export const Dashboard = ({}) => {
             setPosts(r.data);
             return r.data}),
     ).data;
-    console.log(posts);
+    
+    if (typeof posts !== "undefined"){
+        console.log(posts.length);
+        if(posts.length > 0){
+            posts = posts.slice(0, Math.min(posts.length, MAX_DASHBOARD_DOCUMENTS));
+        }
+        console.log(posts);
+        console.log(posts.length);
+    }
     if (typeof window !== "undefined") {
         // TODO: only posts of the last x month from today - starting with (sort) newest offers first
         const myJson = JSON.stringify(posts);

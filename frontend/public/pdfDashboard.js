@@ -1,11 +1,10 @@
-
-//var URL_STATIC_SERVER = 'http://jobwall.htl-leonding.ac.at:443';
-
-var URL_STATIC_SERVER = '';//http://localhost:443'; // will be set below
+const DASHBOARD_TIME_PER_DOCUMENT_DISPLAYTIME_MS = 20_000; // 3 docs per Minute
+const RELOAD_TIME_FOR_NEW_DATA = 600_000; // 10 minutes = 600_000; 1 min = 60_000
+var URL_STATIC_SERVER = '';
 
 var index = -1;
 var maxIndex = -1;
-setInterval(changeCurrentPdf, 10000)
+setInterval(changeCurrentPdf, DASHBOARD_TIME_PER_DOCUMENT_DISPLAYTIME_MS)
 
 function changeCurrentPdf() {
     if (index < data.length-1) {
@@ -37,7 +36,7 @@ function changeCurrentPdf() {
     document.getElementById('qrcode').getElementsByTagName('img')[0].style.margin = "auto";
 }
 
-setInterval(getNewPdfList, 600_000) // 10 minutes = 600_000; 1 min = 60_000
+setInterval(getNewPdfList, RELOAD_TIME_FOR_NEW_DATA) // 10 minutes = 600_000; 1 min = 60_000
 function getNewPdfList(){
     if(maxIndex == data.length){
         location.reload();
