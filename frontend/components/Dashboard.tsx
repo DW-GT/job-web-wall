@@ -21,6 +21,19 @@ const PdfBox = styled.div`
     width: 50%;
     padding: 10px;
     height: 100%;
+    text-align: center;
+`;
+
+const QrBox = styled.div`
+/* Create two equal columns that floats next to each other */
+
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 80vh;
+    text-align: center;
+    display: grid;
+    align-items: center;
 `;
 
 const CenterAlign = styled.p`
@@ -88,14 +101,14 @@ export const Dashboard = ({}) => {
                     <canvas id="pdf_renderer"></canvas>
                 </PdfBox>
                 <script src="/qrcode.min.js"></script>
-                <PdfBox>
+                <QrBox>
                     <CenterAlign># # #</CenterAlign>
                     <CenterAlign>Dieser QR-Code kann verwendet werden, um direkt auf das PDF-Dokument zu navigieren!</CenterAlign>
                     <CenterAlign>Diese Seite bzw. Dokumente sind nur intern im Schulnetz erreichbar.</CenterAlign>
                     <CenterAlign>Daher muss die Verbindung mit WLAN aktiviert sein!</CenterAlign>
                     <CenterAlign># # #</CenterAlign>
                     <div id="qrcode"></div>
-                </PdfBox>
+                </QrBox>
             </div>
  
             <script src="/pdfDashboard.js"></script>
