@@ -25,7 +25,9 @@ const PdfBox = styled.div`
 `;
 
 const QrBox = styled.div`
-/* Create two equal columns that floats next to each other */
+/* Create two equal columns that floats next to each other
+   height: 80vh means 80percent of Monitor
+   display: grid to see qr-code on a line */
 
     float: left;
     width: 50%;
