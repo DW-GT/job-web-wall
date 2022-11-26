@@ -13,7 +13,7 @@ const JobDetailsLayout = styled.div`
     flex-direction: column;
     padding: 7vh 5vw;
     font-family: ${fonts.primaryFont};
-    color: ${colors.primaryBackgroundColor};
+    color: ${colors.primaryColor};
     font-weight: bold;
     @media ${device.desktop} {
         padding: 15vh 15vw;

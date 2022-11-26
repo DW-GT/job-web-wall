@@ -59,6 +59,7 @@ const StyledLoginButton = styled.input`
         }
         padding: 1vh 3vw;
     }
+    color: ${colors.primaryColor};
 `;
 
 export const Login = () => {

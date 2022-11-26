@@ -42,11 +42,16 @@ const StyledSpaceBar = styled.div`
     background-color: ${colors.primaryBackgroundColor};
 `;
 
+const StyledLabel = styled.label`
+    color: ${colors.primaryColor};
+`;
+
 const StyledInputField = styled.input`
     border: solid 1px black;
     border-radius: 200px;
     margin: 2vh 0;
     padding: 1vh 1vw;
+    color: ${colors.primaryColor};
 `;
 
 const StyledTextField = styled.textarea`
@@ -81,6 +86,7 @@ const StyledLoginButton = styled.input`
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
     }
     padding: 1vh 3vw;
+    color: ${colors.primaryColor};
 `;
 
 function getDateFormatted(dateString) {
@@ -204,7 +210,7 @@ export const ApplicationAdd = () => {
                 <StyledSpaceBar></StyledSpaceBar>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <br />
-                    <label>Name:</label>
+                    <StyledLabel>Name:</StyledLabel>
                     <br />
                     <StyledInputField
                         placeholder="Name"
@@ -212,7 +218,7 @@ export const ApplicationAdd = () => {
                         onChange={(e) => setName(e.target.value)}
                     ></StyledInputField>
                     <br />
-                    <label>Firma:</label>
+                    <StyledLabel>Firma:</StyledLabel>
                     <br />
                     <StyledInputField
                         placeholder="Firma"
@@ -220,7 +226,7 @@ export const ApplicationAdd = () => {
                         onChange={(e) => setCompany(e.target.value)}
                     ></StyledInputField>
                     <br />
-                    <label>E-Mail:</label>
+                    <StyledLabel>E-Mail:</StyledLabel>
                     <br />
                     <StyledInputField
                         placeholder="Email"
@@ -229,7 +235,7 @@ export const ApplicationAdd = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     ></StyledInputField>
                     <br />
-                    <label>Telefon:</label>
+                    <StyledLabel>Telefon:</StyledLabel>
                     <br />
                     <StyledInputField
                         placeholder="Telefon"
@@ -237,7 +243,7 @@ export const ApplicationAdd = () => {
                         onChange={(e) => setTelefon(e.target.value)}
                     ></StyledInputField>
                     <br />
-                    <label>PDF:</label>
+                    <StyledLabel>PDF:</StyledLabel>
                     <br />
                     <StyledInputField
                         name="file"
@@ -248,14 +254,14 @@ export const ApplicationAdd = () => {
                     ></StyledInputField>
                     <br />
                     
-                    <label>Beschreibung:</label>
+                    <StyledLabel>Beschreibung:</StyledLabel>
                     <br />
                     <StyledTextField
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     ></StyledTextField>
                     <br />
-                    <label>Typ:</label>
+                    <StyledLabel>Typ:</StyledLabel>
                     <br />
                     <StyledSelectField
                         value={type}

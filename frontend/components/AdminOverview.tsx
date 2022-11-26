@@ -16,9 +16,12 @@ const AdminOverviewLayout = styled.table`
 
 const StyledAdminTableHeader = styled.th`
     text-align: left;
+    color: ${colors.primaryColor};
 `;
 
-const StyledAdminTableContent = styled.td``;
+const StyledAdminTableContent = styled.td`
+    color: ${colors.primaryColor};
+`;
 
 const StyledEditLink = styled.a`
     text-decoration: none;
@@ -36,6 +39,7 @@ const StyledDeleteButton = styled.button`
     :hover {
         text-decoration: underline;
     }
+    color: ${colors.primaryColor};
 `;
 
 const DeleteApplicationLayout = styled.div`
@@ -55,7 +59,7 @@ const DeleteApplicationBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${colors.secondaryColor};
+    background-color: ${colors.primaryColor};
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
     flex-direction: column;
 `;
@@ -71,6 +75,7 @@ const StyledButton = styled.button`
     }
     padding: 1vh 3vw;
     margin: 1vh 1vw;
+    color: ${colors.primaryColor};
 `;
 
 const StyledLink = styled.a`
@@ -83,6 +88,7 @@ const StyledAddButton = styled.a`
     :hover {
         font-size: 1.5rem;
     }
+    color: ${colors.primaryColor};
 `;
 
 export const AdminOverview = () => {

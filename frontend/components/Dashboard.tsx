@@ -22,6 +22,7 @@ const PdfBox = styled.div`
     padding: 10px;
     height: 100%;
     text-align: center;
+    padding: 1em; 
 `;
 
 const QrBox = styled.div`
@@ -36,6 +37,10 @@ const QrBox = styled.div`
     text-align: center;
     display: grid;
     align-items: center;
+    background: ${colors.lightBoxBackgroundColor}; 
+    padding: 1em; 
+    margin: 1em 0;
+    color: ${colors.primaryColor};
 `;
 
 const CenterAlign = styled.p`
@@ -105,7 +110,7 @@ export const Dashboard = ({}) => {
                 <script src="/qrcode.min.js"></script>
                 <QrBox>
                     <CenterAlign># # #</CenterAlign>
-                    <CenterAlign>Dieser QR-Code kann verwendet werden, um direkt auf das PDF-Dokument zu navigieren!</CenterAlign>
+                    <CenterAlign>Dieser QR-Code kann verwendet werden,<br></br>um direkt auf das PDF-Dokument zu navigieren!</CenterAlign>
                     <CenterAlign>Diese Seite bzw. Dokumente sind nur intern im Schulnetz erreichbar.</CenterAlign>
                     <CenterAlign>Daher muss die Verbindung mit WLAN aktiviert sein!</CenterAlign>
                     <CenterAlign># # #</CenterAlign>
