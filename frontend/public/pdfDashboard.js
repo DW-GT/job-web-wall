@@ -34,6 +34,7 @@ function changeCurrentPdf() {
         correctLevel : QRCode.CorrectLevel.H
     });
     document.getElementById('qrcode').getElementsByTagName('img')[0].style.margin = "auto";
+    document.getElementById('qrcode').getElementsByTagName('img')[0].style.height = "20vh";
 }
 
 setInterval(getNewPdfList, RELOAD_TIME_FOR_NEW_DATA) // 10 minutes = 600_000; 1 min = 60_000
