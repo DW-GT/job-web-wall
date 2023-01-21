@@ -45,6 +45,7 @@ const QrBox = styled.div`
 
 const CenterAlign = styled.p`
     text-align: center;
+    font-size: 1vw; 
 `;
 
 const MAX_DASHBOARD_DOCUMENTS = 30;
