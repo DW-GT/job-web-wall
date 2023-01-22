@@ -120,9 +120,6 @@ export const Dashboard = ({}) => {
             </div>
  
             <script src="/pdfDashboard.js"></script>
-            <div id="pdf_data_row" data-row="[[&quot;Musicals&quot;,40,28.6,6], ...]"></div>
-
-
         
         </div>
     );
