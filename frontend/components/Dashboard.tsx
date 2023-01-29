@@ -1,12 +1,10 @@
 import React from 'react';
 import { theme } from '../theme';
 import styled from 'styled-components';
-import { ApplicationBox } from './ApplicationBox';
 import useSWR from 'swr';
 import { useState } from 'react';
 import axios from 'axios';
 import store from '../redux/store';
-import { device } from '../devices';
 
 const { colors, fonts } = theme;
 

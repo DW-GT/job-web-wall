@@ -20,7 +20,7 @@ const DashboardPage = () =>{
     return(
     
     <ThemeProvider theme={theme}>
-        <Navigation showNavigationSelectBox={true}></Navigation>
+        <Navigation></Navigation>
         <Stretcher>
         <Dashboard></Dashboard>
         </Stretcher>
