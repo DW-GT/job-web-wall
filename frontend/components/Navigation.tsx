@@ -10,6 +10,7 @@ const { colors, fonts } = theme;
 
 type Props = {
     showNavigationSelectBox?: boolean;
+    showNavigationClock?: boolean;
 };
 
 const StyledHtlLogo = styled.a`
@@ -74,7 +75,7 @@ const StyledOption = styled.option`
     text-align-last: center;
 `;
 
-export const Navigation: React.FC<Props> = ({ showNavigationSelectBox }) => {
+export const Navigation: React.FC<Props> = ({ showNavigationSelectBox, showNavigationClock }) => {
     const applicationTypes = useSWR(
         process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/getOfferTypes/',
         (url: string) => axios(url).then((r) => r.data),
@@ -110,6 +111,14 @@ export const Navigation: React.FC<Props> = ({ showNavigationSelectBox }) => {
                         );
                     })}
                 </StyledSelectBox>
+            ) : (
+                ''
+            )}
+            {showNavigationClock ? (
+                <div>
+                    <script type="module" src="/time/index.js"></script>
+                    <div id="time-component"></div>
+                </div>
             ) : (
                 ''
             )}
