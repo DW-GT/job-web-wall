@@ -44,15 +44,16 @@ function getNewPdfList(){
     }
 }
 
-var data = []
-updateData(); // set current data from server
+let data = []
+//updateData(); // set current data from server
+setTimeout(updateData, 500)
 
-var myState = {
+let myState = {
     pdf: null,
     currentPage: 1,
     zoom: 1
 }
-setTimeout(changeCurrentPdf, 500)
+setTimeout(changeCurrentPdf, 600)
 
 
 function render() {

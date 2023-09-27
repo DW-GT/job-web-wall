@@ -49,7 +49,7 @@ const CenterAlign = styled.p`
 const MAX_DASHBOARD_DOCUMENTS = 30;
 
 
-export const Dashboard = ({}) => {
+export const DashboardAbsleo = ({}) => {
     const [inputValue, setInputValue] = useState('');
     const applicationTypes = useSWR(
         process.env.NEXT_PUBLIC_API_ADRESS+'/api/application/getOfferTypes/',
@@ -83,6 +83,8 @@ export const Dashboard = ({}) => {
     if (typeof posts !== "undefined"){
         console.log(posts.length);
         if(posts.length > 0){
+            // Filter only posts for absleo-companies
+            posts = posts.filter( value => value.description.toLowerCase().indexOf("absleo") > -1);
             posts = posts.slice(0, Math.min(posts.length, MAX_DASHBOARD_DOCUMENTS));
         }
         console.log(posts);
